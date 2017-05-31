@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -10,20 +9,29 @@ public class GameManager : MonoBehaviour {
 
 	float initialDistance = 50f;
 
-	GameObject star;
+	GameObject StarPrefab;
+
+	float starsCount = 5;
+	List<GameObject> stars = new List<GameObject>();
 
 	void Start() {
-		GameObject Star = Resources.Load("Prefabs/Star", typeof(GameObject)) as GameObject;
+		StarPrefab = Resources.Load("Prefabs/Star", typeof(GameObject)) as GameObject;
+		AddStars();
+	}
 
-		star = Instantiate(Star);
+	void AddStars() {
+		for (int i = 0; i < starsCount; i++) {
+			GameObject aStar = Instantiate(StarPrefab);
+			aStar.GetComponent<StarScript>().Init(RandomPosition());
+			aStar.SetActive(true);
+		}
+	}
 
-		Vector3 position = new Vector3(
-			              Random.Range(-width / 2, width / 2),
-			              Random.Range(-height / 2, height / 2),
-			              initialDistance);
-		star.GetComponent<StarScript>().Init(position);
-
-		star.SetActive(true);
+	Vector3 RandomPosition() {
+		return new Vector3(
+			Random.Range(-width / 2, width / 2),
+			Random.Range(-height / 2, height / 2),
+			initialDistance);
 	}
 
 	void Update() {
