@@ -5,12 +5,18 @@ using UnityEngine;
 public class StarScript : MonoBehaviour {
 
 	float size = 0.3f;
-	float distPerFrame = 0.08f;
+	float speed = 60.0f;
 
-	float width = 40f;
-	float height = 30f;
 	float distanceMax = 100f;
 	float distanceMin = 40f;
+
+	float width;
+	float height;
+
+	public void Init(float sceneWidth, float sceneHeight) {
+		width = sceneWidth;
+		height = sceneHeight;
+	}
 
 	void Start () {
 		transform.position = RandomPosition();
@@ -21,7 +27,7 @@ public class StarScript : MonoBehaviour {
 		if (transform.position.z < -5.0f) {
 			transform.position = RandomPosition();
 		} else {
-			transform.Translate(new Vector3(0, 0, -(distPerFrame / Time.deltaTime)));
+			transform.Translate(new Vector3(0, 0, -(speed * Time.deltaTime)));
 		}
 	}
 

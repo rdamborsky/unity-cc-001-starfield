@@ -6,7 +6,10 @@ public class GameManager : MonoBehaviour {
 
 	GameObject StarPrefab;
 
-	float starsCount = 100;
+	float width = 100f;
+	float height = 60f;
+
+	float starsCount = 200;
 	List<GameObject> stars = new List<GameObject>();
 
 	void Start() {
@@ -17,6 +20,7 @@ public class GameManager : MonoBehaviour {
 	void AddStars() {
 		for (int i = 0; i < starsCount; i++) {
 			GameObject aStar = Instantiate(StarPrefab);
+			aStar.GetComponent<StarScript>().Init(width, height);
 			aStar.SetActive(true);
 			stars.Add(aStar);
 		}
