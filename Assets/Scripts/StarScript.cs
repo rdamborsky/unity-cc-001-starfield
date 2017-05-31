@@ -5,10 +5,10 @@ using UnityEngine;
 public class StarScript : MonoBehaviour {
 
 	float size = 0.3f;
-	float distPerFrame = 0.02f;
+	float distPerFrame = 0.08f;
 
-	float width = 20f;
-	float height = 20f;
+	float width = 40f;
+	float height = 30f;
 	float distanceMax = 100f;
 	float distanceMin = 40f;
 
@@ -16,7 +16,7 @@ public class StarScript : MonoBehaviour {
 		transform.position = RandomPosition();
 		transform.localScale = new Vector3(size, size, size);
 	}
-				
+
 	void Update () {
 		if (transform.position.z < -5.0f) {
 			transform.position = RandomPosition();
