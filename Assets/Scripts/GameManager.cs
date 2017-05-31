@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour {
 
 	float width = 20f;
 	float height = 20f;
-
 	float initialDistance = 50f;
 
 	GameObject StarPrefab;
@@ -22,19 +21,16 @@ public class GameManager : MonoBehaviour {
 	void AddStars() {
 		for (int i = 0; i < starsCount; i++) {
 			GameObject aStar = Instantiate(StarPrefab);
-			aStar.GetComponent<StarScript>().Init(RandomPosition());
+			aStar.GetComponent<StarScript>().Init(width, height, initialDistance);
 			aStar.SetActive(true);
+			stars.Add(aStar);
 		}
 	}
-
-	Vector3 RandomPosition() {
-		return new Vector3(
-			Random.Range(-width / 2, width / 2),
-			Random.Range(-height / 2, height / 2),
-			initialDistance);
-	}
-
-	void Update() {
 		
+	void Update() {
+		for (int i = 0; i < starsCount; i++) {
+			GameObject aStar = stars[i];
+			aStar.SetActive(true);
+		}
 	}
 }
