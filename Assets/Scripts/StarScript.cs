@@ -4,17 +4,31 @@ using UnityEngine;
 
 public class StarScript : MonoBehaviour {
 
+	float size = 0.3f;
+	float distPerFrame = 0.02f;
+
+	float width = 20f;
+	float height = 20f;
+	float distanceMax = 100f;
+	float distanceMin = 40f;
+
 	void Start () {
+		transform.position = RandomPosition();
+		transform.localScale = new Vector3(size, size, size);
+	}
+				
+	void Update () {
+		if (transform.position.z < -5.0f) {
+			transform.position = RandomPosition();
+		} else {
+			transform.Translate(new Vector3(0, 0, -(distPerFrame / Time.deltaTime)));
+		}
 	}
 
-	public void Init(float width, float height, float distance) {
-		transform.position = new Vector3(
+	Vector3 RandomPosition() {
+		return new Vector3(
 			Random.Range(-width / 2, width / 2),
 			Random.Range(-height / 2, height / 2),
-			distance);
-	}
-		
-	void Update () {
-		transform.Translate(new Vector3(0, 0, -0.1f));
+			Random.Range(distanceMin, distanceMax));
 	}
 }
