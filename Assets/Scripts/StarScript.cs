@@ -5,7 +5,7 @@ using UnityEngine;
 public class StarScript : MonoBehaviour {
 
 	float size = 0.3f;
-	float speed = 60.0f;
+	float speed = 40.0f;
 
 	float distanceMax = 100f;
 	float distanceMin = 40f;
@@ -21,11 +21,15 @@ public class StarScript : MonoBehaviour {
 	void Start () {
 		transform.position = RandomPosition();
 		transform.localScale = new Vector3(size, size, size);
+		Color c = Random.ColorHSV();
+		GetComponent<Renderer>().material.color = c;
+		GetComponent<TrailRenderer>().material.color = c;
 	}
 
 	void Update () {
 		if (transform.position.z < -5.0f) {
 			transform.position = RandomPosition();
+			GetComponent<TrailRenderer>().Clear();
 		} else {
 			transform.Translate(new Vector3(0, 0, -(speed * Time.deltaTime)));
 		}
